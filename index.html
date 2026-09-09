@@ -13,6 +13,11 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+<link rel="manifest" href="manifest.json">
+<!-- Baris di bawah (Apple Touch Icon) opsional, tapi bagus agar logo muncul sempurna di iPhone/iPad -->
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-512.png">
+
 <style>
   :root{ --brand:#4f46e5; }
   body{ font-family:'Plus Jakarta Sans',sans-serif; background:#f6f8fc; }
@@ -3974,6 +3979,24 @@ document.addEventListener('keydown', e=>{
     '\nModul:',Registry.all.length,'· Engine simulasi:',Object.keys(SIM_ENGINES).length,
     '\nTambah modul di §14 MODULE REGISTRY.');
 })();
+
+
 </script>
+
+<!-- SYSTEM: REGISTER PWA SERVICE WORKER -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then((registration) => {
+          console.log('PWA ServiceWorker berhasil didaftarkan dengan scope:', registration.scope);
+        })
+        .catch((error) => {
+          console.log('PWA ServiceWorker gagal didaftarkan:', error);
+        });
+    });
+  }
+</script>
+
 </body>
 </html>
