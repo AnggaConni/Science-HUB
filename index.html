@@ -69,26 +69,112 @@
 </div>
 
 <!-- ===== NAVBAR (bright) ===== -->
-<nav class="bg-white/90 backdrop-blur px-3 md:px-4 py-2.5 flex justify-between items-center shadow-sm z-30 border-b border-slate-200 shrink-0">
-  <div class="flex items-center gap-2.5 cursor-pointer" onclick="Router.home()">
-    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 via-blue-500 to-cyan-400 flex items-center justify-center shadow-md shadow-indigo-200">
-      <i class="fa-solid fa-flask-vial text-white text-sm"></i>
+<!-- ===== RESPONSIVE NAVBAR ===== -->
+<nav class="bg-white/95 backdrop-blur px-3 sm:px-4 py-2.5
+            flex items-center justify-between gap-2
+            shadow-sm z-30 border-b border-slate-200 shrink-0">
+
+  <!-- BRAND -->
+  <div
+    class="flex items-center gap-2.5 cursor-pointer min-w-0 flex-1"
+    onclick="Router.home()"
+  >
+    <!-- Logo -->
+    <div class="w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-xl
+                bg-gradient-to-br from-indigo-500 via-blue-500 to-cyan-400
+                flex items-center justify-center
+                shadow-md shadow-indigo-200">
+      <i class="fa-solid fa-flask-vial text-white text-sm sm:text-base"></i>
     </div>
-    <div>
-      <h1 class="font-extrabold text-[13px] tracking-tight leading-none text-slate-800">POCKET SCIENCE LAB</h1>
-      <p class="text-[10px] text-slate-400 mt-0.5">Instrumen sains modular · v0.2</p>
+
+    <!-- Brand Text -->
+    <div class="min-w-0">
+      <h1 class="font-extrabold text-[12px] sm:text-[13px]
+                 tracking-tight leading-none text-slate-800
+                 truncate">
+        POCKET SCIENCE LAB
+      </h1>
+
+      <p class="text-[9px] sm:text-[10px]
+                text-slate-400 mt-1 leading-none
+                truncate">
+        Instrumen sains modular · v0.2
+      </p>
     </div>
   </div>
-  <div class="flex items-center gap-1.5">
-    <div id="xp-chip" class="hidden sm:flex items-center gap-1.5 bg-amber-50 border border-amber-200 text-amber-700 text-[11px] font-bold px-2.5 py-1.5 rounded-full">
-      <i class="fa-solid fa-bolt"></i><span id="xp-text">Lv 1 · 0 XP</span>
+
+
+  <!-- RIGHT CONTROLS -->
+  <div class="flex items-center gap-1.5 shrink-0">
+
+    <!-- XP -->
+    <div
+      id="xp-chip"
+      class="flex items-center gap-1
+             bg-amber-50 border border-amber-200
+             text-amber-700 font-bold
+             px-2 sm:px-2.5 py-1.5
+             rounded-full
+             text-[10px] sm:text-[11px]"
+    >
+      <i class="fa-solid fa-bolt text-[10px]"></i>
+
+      <!-- Mobile -->
+      <span id="xp-text-mobile" class="sm:hidden">
+        Lv 1
+      </span>
+
+      <!-- Desktop -->
+      <span id="xp-text" class="hidden sm:inline">
+        Lv 1 · 0 XP
+      </span>
     </div>
-    <button onclick="UI.capabilityModal()" id="cap-chip" class="bg-slate-50 hover:bg-slate-100 text-[11px] font-bold px-2.5 py-1.5 rounded-full border border-slate-200 text-slate-600">
-      <i class="fa-solid fa-microchip mr-1 text-indigo-500"></i><span id="cap-count">…</span>
+
+
+    <!-- CAPABILITIES -->
+    <button
+      onclick="UI.capabilityModal()"
+      id="cap-chip"
+      class="flex items-center justify-center
+             bg-slate-50 hover:bg-slate-100
+             border border-slate-200
+             text-slate-600 font-bold
+             rounded-full
+             w-9 h-9 sm:w-auto sm:h-auto
+             sm:px-2.5 sm:py-1.5
+             text-[11px]"
+      aria-label="Capabilities"
+    >
+      <i class="fa-solid fa-microchip
+                text-indigo-500
+                sm:mr-1"></i>
+
+      <!-- Mobile: number only -->
+      <span id="cap-count-mobile" class="sm:hidden">
+        6
+      </span>
+
+      <!-- Desktop -->
+      <span id="cap-count" class="hidden sm:inline">
+        6 fitur
+      </span>
     </button>
-    <button onclick="UI.settingsModal()" class="bg-slate-50 hover:bg-slate-100 w-9 h-9 rounded-full border border-slate-200 text-slate-600">
-      <i class="fa-solid fa-sliders"></i>
+
+
+    <!-- SETTINGS -->
+    <button
+      onclick="UI.settingsModal()"
+      class="bg-slate-50 hover:bg-slate-100
+             w-9 h-9 shrink-0
+             rounded-full
+             border border-slate-200
+             text-slate-600
+             flex items-center justify-center"
+      aria-label="Settings"
+    >
+      <i class="fa-solid fa-sliders text-sm"></i>
     </button>
+
   </div>
 </nav>
 
@@ -153,11 +239,78 @@
   <div id="dash-pane" class="w-full md:w-[58%] lg:w-[62%] flex-1 h-full overflow-y-auto bg-slate-50 relative">
     <!-- HOME -->
     <div id="view-home" class="p-4 md:p-7 fade-in">
-      <div class="rounded-2xl bg-gradient-to-br from-indigo-500 via-blue-500 to-cyan-400 p-5 text-white shadow-lg shadow-indigo-200 mb-5">
-        <p class="text-[11px] font-bold uppercase tracking-widest opacity-80">Learning Loop</p>
-        <h2 class="text-xl font-extrabold mt-1">Tanya → Duga → Hitung → Simulasi → Ukur → Bandingkan</h2>
-        <p class="text-xs opacity-90 mt-1.5">Bukan kalkulator yang menjelaskan sains, tapi instrumen sains yang melatih cara berpikir.</p>
-        <div id="home-caps" class="flex flex-wrap gap-1.5 mt-3"></div>
+
+      <!-- ===== HOME INFORMATION ===== -->
+      <div
+        class="relative overflow-hidden rounded-2xl
+              bg-gradient-to-br from-indigo-700 via-blue-700 to-cyan-600
+              p-4 sm:p-5
+              text-white
+              shadow-lg shadow-blue-200/60
+              mb-5"
+      >
+
+        <!-- subtle decorative glow -->
+        <div
+          class="absolute -right-10 -top-10
+                w-32 h-32 rounded-full
+                bg-cyan-300/10 blur-2xl pointer-events-none"
+        ></div>
+
+        <div
+          class="absolute -left-10 -bottom-10
+                w-28 h-28 rounded-full
+                bg-indigo-300/10 blur-2xl pointer-events-none"
+        ></div>
+
+
+        <!-- LABEL -->
+        <div class="relative">
+          <p
+            class="text-[10px] sm:text-[11px]
+                  font-bold uppercase tracking-[0.14em]
+                  text-blue-100/80"
+          >
+            Learning Loop
+          </p>
+
+
+          <!-- MAIN TITLE -->
+          <h2
+            class="mt-1.5
+                  text-[18px] sm:text-xl
+                  leading-[1.25]
+                  font-extrabold
+                  tracking-tight
+                  max-w-xl"
+          >
+            Tanya → Duga → Hitung
+            <span class="hidden sm:inline">→</span>
+            <br class="sm:hidden">
+            Simulasi → Ukur → Bandingkan
+          </h2>
+
+
+          <!-- DESCRIPTION -->
+          <p
+            class="text-[11px] sm:text-xs
+                  leading-relaxed
+                  text-blue-50/85
+                  mt-2
+                  max-w-lg"
+          >
+            Bukan sekadar kalkulator yang menjelaskan sains,
+            tetapi instrumen untuk melatih cara berpikir.
+          </p>
+
+
+          <!-- CAPABILITIES -->
+          <div
+            id="home-caps"
+            class="flex flex-wrap gap-1.5 mt-3.5"
+          ></div>
+
+        </div>
       </div>
 
       <div class="flex gap-2 mb-3">
@@ -189,6 +342,7 @@
       <div class="p-4 md:p-6 pb-28" id="tab-content-container"></div>
     </div>
   </div>
+
 </div>
 
 <!-- MOBILE NAV -->
